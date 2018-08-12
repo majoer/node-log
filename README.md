@@ -13,7 +13,7 @@ Output (in console):
 ```
 
 #### How does it work?
-It simply builds the debug `namespace` from `name` in your `package.json` and __filename, which is used to initialize node-log.
+It simply builds the debug `namespace` from `name` in your `package.json` and `__filename`, which is used to initialize node-log.
 
 #### I see no output in the console :S
 
