@@ -1,15 +1,21 @@
 const mock = require('mock-require');
-let log = require('./log');
+let log = require('./log')(__filename);
 
 describe('log', () => {
-  let message;
+  let actualNamespace;
+  let actualMessage;
 
   beforeEach(() => {
-    mock('debug', (msg) => {
-      message = msg;
+    mock('debug', (namespace) => {
+      actualNamespace = namespace;
+
+      return (message) => {
+        actualMessage = message;
+        console.log(`${actualNamespace} ${message}`);
+      };
     });
 
-    log = mock.reRequire('./log');
+    log = mock.reRequire('./log')(__filename);
   });
 
   afterEach(() => {
@@ -17,8 +23,9 @@ describe('log', () => {
   });
 
   it('Should log expected message', () => {
-    log('my-module');
+    log('My message');
 
-    expect(message).toBe('node-log:my-module');
+    expect(actualNamespace).toBe('node-log:log.spec.js');
+    expect(actualMessage).toBe('My message');
   });
 });
