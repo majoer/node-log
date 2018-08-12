@@ -2,7 +2,7 @@
 
 Wrapper for https://www.npmjs.com/package/debug
 
-Usage:
+#### Usage:
 ```
 var log = require('node-log')(__filename);
 
